@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Research Cambodia | SUC News Insights</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Kantumruy Pro & Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -27,164 +25,259 @@
     <style>
         body {
             font-family: 'Inter', 'Kantumruy Pro', sans-serif;
-            background-color: #0b1120;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .tech-gradient {
+        /* ជួសជុល Bug Gradient អក្សរឱ្យដើរត្រឹមត្រូវទាំងពីរ Modes */
+        .text-gradient-fix {
             background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-        }
-        .card-glow:hover {
-            box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
-            border-color: rgba(79, 172, 254, 0.5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
-<body class="text-slate-200 min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-900">
+<body class="bg-slate-50 text-slate-800 dark:bg-[#0b1120] dark:text-slate-200 min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
 
-    <!-- Header / Navigation -->
-    <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50">
+    <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-50 transition-colors">
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 rounded-lg tech-gradient flex items-center justify-between justify-center text-slate-900 font-bold text-xl shadow-lg shadow-cyan-500/20 pl-2">
-                    <i class="fa-solid fa-laptop-code text-sm pr-2"></i>
+                <div class="w-9 h-9 rounded-lg bg-cyan-500 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                    <i class="fa-solid fa-laptop-code text-sm"></i>
                 </div>
-                <span class="text-lg font-bold tracking-wider text-white">IT RESEARCH <span class="text-cyan-400">KH</span></span>
+                <span class="text-lg font-bold tracking-wider text-slate-900 dark:text-white">IT RESEARCH <span class="text-cyan-600 dark:text-cyan-400">KH</span></span>
             </div>
-            <a href="https://www.youtube.com/watch?v=mdnHinbaNgo" target="_blank" class="flex items-center space-x-2 bg-rose-600 hover:bg-rose-700 text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-lg shadow-rose-600/20">
-                <i class="fa-brands fa-youtube text-lg"></i>
-                <span>មើលវីដេអូពេញ</span>
-            </a>
+            
+            <div class="flex items-center space-x-4">
+                <button id="themeToggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition" title="Toggle Light/Dark Mode">
+                    <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+
+                <select id="langSelect" class="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-sm font-medium px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 focus:outline-none focus:border-cyan-500 cursor-pointer">
+                    <option value="km">ភាសាខ្មែរ</option>
+                    <option value="en">English</option>
+                </select>
+
+                <a href="https://www.youtube.com/watch?v=mdnHinbaNgo" target="_blank" class="hidden sm:flex items-center space-x-2 bg-rose-600 hover:bg-rose-700 text-white text-sm font-medium px-4 py-2 rounded-full transition shadow-md shadow-rose-600/10">
+                    <i class="fa-brands fa-youtube text-lg"></i>
+                    <span data-i18n="watchBtn">មើលវីដេអូពេញ</span>
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 overflow-hidden border-b border-slate-800/50 bg-slate-950">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.15),transparent_50%)]"></div>
+    <section class="relative py-20 overflow-hidden border-b border-slate-200 dark:border-slate-800/50 bg-white dark:bg-slate-950 transition-colors">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.08),transparent_50%)]"></div>
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <span class="inline-flex items-center space-x-2 bg-cyan-500/10 text-cyan-400 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-500/20 mb-6">
-                <i class="fa-solid fa-graduation-cap mr-1"></i> ជំនួយស្មារតីសម្រាប់ការស្រាវជ្រាវអាកាដេមី
+            <span class="inline-flex items-center space-x-2 bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-500/20 mb-6">
+                <i class="fa-solid fa-graduation-cap mr-1"></i> <span data-i18n="heroBadge">ជំនួយស្មារតីសម្រាប់ការស្រាវជ្រាវអាកាដេមី</span>
             </span>
-            <h1 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6">
-                ទស្សនវិស័យ និងការវិវត្តនៃ <br class="hidden md:block">
-                <span class="text-transparent bg-clip-text tech-gradient">វិស័យព័ត៌មានវិទ្យា (IT) នៅកម្ពុជា</span>
-            </h1>
-            <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-                ចំណុចគន្លឹះសំខាន់ៗដែលស្រង់ចេញពីកិច្ចសម្ភាសន៍របស់កម្មវិធី <span class="text-white font-medium">SUC News Podcast (Ep11)</span> ជាមួយប្រធានគ្រប់គ្រងបច្ចេកវិទ្យាដែលមានបទពិសោធន៍ជិត ១០ ឆ្នាំ។
+            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight mb-6" id="mainHeading">
+                </h1>
+            <p class="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto font-light leading-relaxed">
+                <span data-i18n="heroDesc">ចំណុចគន្លឹះសំខាន់ៗដែលស្រង់ចេញពីកិច្ចសម្ភាសន៍របស់កម្មវិធី SUC News Podcast (Ep11) ជាមួយប្រធានគ្រប់គ្រងបច្ចេកវិទ្យាដែលមានបទពិសោធន៍ជិត ១០ ឆ្នាំ។</span>
             </p>
         </div>
     </section>
 
-    <!-- Main Content Grid -->
-    <main class="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow">
+    <main class="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 gap-8 flex-grow w-full">
         
-        <!-- Block 1: Market Landscape -->
-        <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-6 md:p-8 transition duration-300 card-glow relative group">
-            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xl mb-6 group-hover:scale-110 transition">
+        <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 md:p-8 transition shadow-sm hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] relative group">
+            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-xl mb-6 group-hover:scale-105 transition">
                 <i class="fa-solid fa-chart-line"></i>
             </div>
-            <h2 class="text-xl font-bold text-white mb-4">១. ស្ថានភាពទីផ្សារការងារ IT នៅកម្ពុជា</h2>
-            <ul class="space-y-4 text-slate-400 text-sm leading-relaxed">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4" data-i18n="block1Title">១. ស្ថានភាពទីផ្សារការងារ IT នៅកម្ពុជា</h2>
+            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                 <li class="flex items-start">
-                    <span class="text-cyan-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">ផ្នែកដែលមានតម្រូវការខ្ពស់៖</strong> ផ្នែក Software Development ឈានមុខគេ បន្ទាប់មកគឺ Network & Infrastructure និង UI/Digital Design។</span>
+                    <span class="text-cyan-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block1Point1"><strong class="text-slate-800 dark:text-slate-200">ផ្នែកដែលមានតម្រូវការខ្ពស់៖</strong> ផ្នែក Software Development ឈានមុខគេ បន្ទាប់មកគឺ Network & Infrastructure និង UI/Digital Design។</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-cyan-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">ការរីករាលដាលគ្រប់វិស័យ៖</strong> ជំរុញដោយបរិវត្តកម្មឌីជីថលក្នុងវិស័យធនាគារ (Mobile Apps, QR Payments) សុខាភិបាល និងដឹកជញ្ជូន។</span>
+                    <span class="text-cyan-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block1Point2"><strong class="text-slate-800 dark:text-slate-200">ការរីករាលដាលគ្រប់វិស័យ៖</strong> ជំរុញដោយបរិវត្តកម្មឌីជីថលក្នុងវិស័យធនាគារ (Mobile Apps, QR Payments) សុខាភិបាល និងដឹកជញ្ជូន។</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-cyan-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">គម្លាតជំនាញ៖</strong> ក្រុមហ៊ុនខ្វះអ្នកជំនាញពិតប្រាកដ ខណៈនិស្សិតខ្លះរកការងារមិនបាន ដោយសារខ្វះសមត្ថភាពអនុវត្តជាក់ស្តែង (Skill Mismatch)។</span>
+                    <span class="text-cyan-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block1Point3"><strong class="text-slate-800 dark:text-slate-200">គម្លាតជំនាញ៖</strong> ក្រុមហ៊ុនខ្វះអ្នកជំនាញពិតប្រាកដ ខណៈនិស្សិតខ្លះរកការងារមិនបាន ដោយសារខ្វះសមត្ថភាពអនុវត្តជាក់ស្តែង (Skill Mismatch)។</span>
                 </li>
             </ul>
         </div>
 
-        <!-- Block 2: Foundational Requirements -->
-        <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-6 md:p-8 transition duration-300 card-glow relative group">
-            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl mb-6 group-hover:scale-110 transition">
+        <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 md:p-8 transition shadow-sm hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] relative group">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl mb-6 group-hover:scale-105 transition">
                 <i class="fa-solid fa-code font-bold"></i>
             </div>
-            <h2 class="text-xl font-bold text-white mb-4">២. លក្ខខណ្ឌគ្រឹះសម្រាប់និស្សិត IT</h2>
-            <ul class="space-y-4 text-slate-400 text-sm leading-relaxed">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4" data-i18n="block2Title">២. លក្ខខណ្ឌគ្រឹះសម្រាប់និស្សិត IT</h2>
+            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                 <li class="flex items-start">
-                    <span class="text-purple-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">ភាសាអង់គ្លេស៖</strong> ជាអាវុធដ៏សំខាន់បំផុតសម្រាប់ការអានឯកសារបច្ចេកទេស ស្រាវជ្រាវស៊ើបកូដ (Bugs) និងស្វ័យសិក្សា។</span>
+                    <span class="text-purple-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block2Point1"><strong class="text-slate-800 dark:text-slate-200">ភាសាអង់គ្លេស៖</strong> ជាអាវុធដ៏សំាន់បំផុតសម្រាប់ការអានឯកសារបច្ចេកទេស ស្រាវជ្រាវស៊ើបកូដ (Bugs) និងស្វ័យសិក្សា។</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-purple-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">Logic & Math៖</strong> គ្រឹះនៃការគិតបែបតក្កវិទ្យា និងគណិតវិទ្យាកម្រិតមូលដ្ឋាន គឺចាំបាច់សម្រាប់ការសរសេរកូដឱ្យមានប្រសិទ្ធភាព។</span>
+                    <span class="text-purple-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block2Point2"><strong class="text-slate-800 dark:text-slate-200">Logic & Math៖</strong> គ្រឹះនៃការគិតបែបតក្កវិទ្យា និងគណិតវិទ្យាកម្រិតមូលដ្ឋាន គឺចាំបាច់សម្រាប់ការសរសេរកូដឱ្យមានប្រសិទ្ធភាព។</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-purple-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">ការបង្ហាញស្នាដៃ៖</strong> ប្រវត្តិរូប (CV) ទទេមិនអាចទាក់ទាញបានទេ ត្រូវតែមានគម្រោងជាក់ស្តែង (Portfolio) បង្ហាញលើទំព័រដូចជា GitHub។</span>
+                    <span class="text-purple-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block2Point3"><strong class="text-slate-800 dark:text-slate-200">ការបង្ហាញស្នាដៃ៖</strong> ប្រវត្តិរូប (CV) ទទេមិនអាចទាក់ទាញបានទេ ត្រូវតែមានគម្រោងជាក់ស្តែង (Portfolio) បង្ហាញលើទំព័រដូចជា GitHub។</span>
                 </li>
             </ul>
         </div>
 
-        <!-- Block 3: Soft Skills & Demographics -->
-        <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-6 md:p-8 transition duration-300 card-glow relative group">
-            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl mb-6 group-hover:scale-110 transition">
+        <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 md:p-8 transition shadow-sm hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.15)] relative group">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 text-xl mb-6 group-hover:scale-105 transition">
                 <i class="fa-solid fa-users"></i>
             </div>
-            <h2 class="text-xl font-bold text-white mb-4">៣. ជំនាញទន់ និងសមភាពយេនឌ័រ</h2>
-            <ul class="space-y-4 text-slate-400 text-sm leading-relaxed">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4" data-i18n="block3Title">៣. ជំនាញទន់ និងសមភាពយេនឌ័រ</h2>
+            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                 <li class="flex items-start">
-                    <span class="text-emerald-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">បញ្ហា Introvert៖</strong> អ្នក IT ភាគច្រើនចំណាយពេលម្នាក់ឯងច្រើន តែការអភិវឌ្ឍ <strong class="text-slate-200">Soft Skills</strong> គឺកាតាលីករជំរុញឱ្យក្លាយជាអ្នកដឹកនាំ ឬ Project Manager។</span>
+                    <span class="text-emerald-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block3Point1"><strong class="text-slate-800 dark:text-slate-200">បញ្ហា Introvert៖</strong> អ្នក IT ភាគច្រើនចំណាយពេលម្នាក់ឯងច្រើន តែការអភិវឌ្ឍ <strong class="text-slate-800 dark:text-slate-200">Soft Skills</strong> គឺកាតាលីករជំរុញឱ្យក្លាយជាអ្នកដឹកនាំ ឬ Project Manager។</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-emerald-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">ស្ត្រីក្នុងវិស័យបច្ចេកវិទ្យា៖</strong> ផ្នត់គំនិតចាស់ៗត្រូវបានផ្លាស់ប្តូរ។ កម្មវិធីរុញច្រានអាហារូបករណ៍បច្ចុប្បន្ន បានបង្កើនអត្រាសិស្សស្រីរៀន IT រហូតដល់ ៦០% ក្នុងវគ្គសិក្សាខ្លះ។</span>
+                    <span class="text-emerald-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block3Point2"><strong class="text-slate-800 dark:text-slate-200">ស្ត្រីក្នុងវិស័យបច្ចេកវិទ្យា៖</strong> ផ្នត់គំនិតចាស់ៗត្រូវបានផ្លាស់ប្តូរ។ កម្មវិធីរុញច្រានអាហារូបករណ៍បច្ចុប្បន្ន បានបង្កើនអត្រាសិស្សស្រីរៀន IT រហូតដល់ ៦០% ក្នុងវគ្គសិក្សាខ្លះ។</span>
                 </li>
             </ul>
         </div>
 
-        <!-- Block 4: AI & Data Challenge -->
-        <div class="bg-slate-900/50 border border-slate-800/80 rounded-2xl p-6 md:p-8 transition duration-300 card-glow relative group">
-            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xl mb-6 group-hover:scale-110 transition">
+        <div class="bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 md:p-8 transition shadow-sm hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] relative group">
+            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 dark:text-amber-400 text-xl mb-6 group-hover:scale-105 transition">
                 <i class="fa-solid fa-brain"></i>
             </div>
-            <h2 class="text-xl font-bold text-white mb-4">៤. ការដើរទន្ទឹមគ្នារវាងមនុស្ស និង AI</h2>
-            <ul class="space-y-4 text-slate-400 text-sm leading-relaxed">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4" data-i18n="block4Title">៤. ការដើរទន្ទឹមគ្នារវាងមនុស្ស និង AI</h2>
+            <ul class="space-y-4 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                 <li class="flex items-start">
-                    <span class="text-amber-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">AI ជាជំនួយការ៖</strong> AI មិនមកដណ្តើមការងារមនុស្សទាំងស្រុងឡើយ មនុស្សនៅតែជាអ្នកដឹកនាំ ត្រួតពិនិត្យ និងវាយតម្លៃលើភាពត្រឹមត្រូវតាមវប្បធម៌ និងលំហូរអាជីវកម្ម។</span>
+                    <span class="text-amber-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block4Point1"><strong class="text-slate-800 dark:text-slate-200">AI ជាជំនួយការ៖</strong> AI មិនមកដណ្តើមការងារមនុស្សទាំងស្រុងឡើយ មនុស្សនៅតែជាអ្នកដឹកនាំ ត្រួតពិនិត្យ និងវាយតម្លៃលើភាពត្រឹមត្រូវតាមវប្បធម៌ និងលំហូរអាជីវកម្ម។</span>
                 </li>
                 <li class="flex items-start">
-                    <span class="text-amber-400 font-bold mr-2">▪</span>
-                    <span><strong class="text-slate-200">បញ្ហាខ្វះខាតទិន្នន័យខ្មែរ៖</strong> ទិន្នន័យភាសាខ្មែរលើអ៊ីនធឺណិតនៅមានកម្រិត ធ្វើឱ្យ AI ជួបផលវិបាកក្នុងការឆ្លើយតប។ ការរួមគ្នាបញ្ចូលទិន្នន័យខ្មែរជាកត្តាចាំបាច់បំផុត។</span>
+                    <span class="text-amber-500 font-bold mr-2">▪</span>
+                    <span data-i18n="block4Point2"><strong class="text-slate-800 dark:text-slate-200">បញ្ហាខ្វះខាតទិន្នន័យខ្មែរ៖</strong> ទិន្នន័យភាសាខ្មែរលើអ៊ីនធឺណិតនៅមានកម្រិត ធ្វើឱ្យ AI ជួបផលវិបាកក្នុងការឆ្លើយតប។ ការរួមគ្នាបញ្ចូលទិន្នន័យខ្មែរជាកត្តាចាំបាច់បំផុត។</span>
                 </li>
             </ul>
         </div>
     </main>
 
-    <!-- Embedded Video Section -->
     <section class="max-w-4xl mx-auto px-4 pb-20 w-full">
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 md:p-8 text-center relative overflow-hidden">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 text-center relative overflow-hidden shadow-sm">
             <div class="absolute inset-0 bg-gradient-to-r from-rose-500/5 to-transparent pointer-events-none"></div>
-            <h3 class="text-xl font-bold text-white mb-3">ប្រភពវីដេអូដើមពី YouTube</h3>
-            <p class="text-slate-400 text-sm mb-6 max-w-lg mx-auto">សូមទស្សនាកិច្ចសម្ភាសន៍ពេញលេញរបស់កម្មវិធី SUC News ជាមួយលោក ម៉ៅ វនបបញ្ញា ដើម្បីទទួលបានខ្លឹមសារលម្អិតបន្ថែម។</p>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3" data-i18n="videoSourceTitle">ប្រភពវីដេអូដើមពី YouTube</h3>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mb-6 max-w-lg mx-auto" data-i18n="videoSourceDesc">សូមទស្សនាកិច្ចសម្ភាសន៍ពេញលេញរបស់កម្មវិធី SUC News ជាមួយលោក ម៉ៅ វនបបញ្ញា ដើម្បីទទួលបានខ្លឹមសារលម្អិតបន្ថែម។</p>
             
-            <!-- Video Action Button -->
             <div class="inline-block group">
-                <a href="https://www.youtube.com/watch?v=mdnHinbaNgo" target="_blank" class="flex items-center space-x-3 bg-slate-950 border border-rose-500/30 hover:border-rose-500/80 px-6 py-4 rounded-xl transition duration-300 shadow-xl">
-                    <div class="w-10 h-10 rounded-full bg-rose-600 flex items-center justify-center text-white text-lg animate-pulse group-hover:scale-110 transition pl-1">
+                <a href="https://www.youtube.com/watch?v=mdnHinbaNgo" target="_blank" class="flex items-center space-x-3 bg-slate-50 dark:bg-slate-950 border border-rose-500/20 dark:border-rose-500/30 hover:border-rose-500/80 px-6 py-4 rounded-xl transition duration-300 shadow-sm">
+                    <div class="w-10 h-10 rounded-full bg-rose-600 flex items-center justify-center text-white text-lg group-hover:scale-105 transition pl-1">
                         <i class="fa-solid fa-play"></i>
                     </div>
                     <div class="text-left">
-                        <p class="text-xs text-slate-500 font-medium uppercase tracking-wider">ផ្លូវការនៅលើ YouTube</p>
-                        <p class="text-sm font-semibold text-rose-400 group-hover:text-rose-300 transition">Ep11 | តើអ្វីទៅជា IT?</p>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 font-medium uppercase tracking-wider" data-i18n="videoPlatform">ផ្លូវការនៅលើ YouTube</p>
+                        <p class="text-sm font-semibold text-rose-600 dark:text-rose-400 transition">Ep11 | តើអ្វីទៅជា IT?</p>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+    <footer class="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-900 py-6 text-center text-xs text-slate-400 dark:text-slate-500 transition-colors">
         <div class="max-w-6xl mx-auto px-4">
-            <p>© 2026 ឯកសារស្រាវជ្រាវផ្ទាល់ខ្លួន - វិស័យព័ត៌មានវិទ្យានៅកម្ពុជា</p>
+            <p data-i18n="footerText">© 2026 ឯកសារស្រាវជ្រាវផ្ទាល់ខ្លួន - វិស័យព័ត៌មានវិទ្យានៅកម្ពុជា</p>
         </div>
     </footer>
 
+    <script>
+        const translations = {
+            km: {
+                watchBtn: "មើលវីដេអូពេញ",
+                heroBadge: "ជំនួយស្មារតីសម្រាប់ការស្រាវជ្រាវអាកាដេមី",
+                heroTitle: "ទស្សនវិស័យ និងការវិវត្តនៃ <br class='hidden md:block'><span class='text-gradient-fix'>វិស័យព័ត៌មានវិទ្យា (IT) នៅកម្ពុជា</span>",
+                heroDesc: "ចំណុចគន្លឹះសំខាន់ៗដែលស្រង់ចេញពីកិច្ចសម្ភាសន៍របស់កម្មវិធី SUC News Podcast (Ep11) ជាមួយប្រធានគ្រប់គ្រងបច្ចេកវិទ្យាដែលមានបទពិសោធន៍ជិត ១០ ឆ្នាំ។",
+                block1Title: "១. ស្ថានភាពទីផ្សារការងារ IT នៅកម្ពុជា",
+                block1Point1: "<strong class='text-slate-800 dark:text-slate-200'>ផ្នែកដែលមានតម្រូវការខ្ពស់៖</strong> ផ្នែក Software Development ឈានមុខគេ បន្ទាប់មកគឺ Network & Infrastructure និង UI/Digital Design។",
+                block1Point2: "<strong class='text-slate-800 dark:text-slate-200'>ការរីករាលដាលគ្រប់វិស័យ៖</strong> ជំរុញដោយបរិវត្តកម្មឌីជីថលក្នុងវិស័យធនាគារ (Mobile Apps, QR Payments) សុខាភិបាល និងដឹកជញ្ជូន។",
+                block1Point3: "<strong class='text-slate-800 dark:text-slate-200'>គម្លាតជំនាញ៖</strong> ក្រុមហ៊ុនខ្វះអ្នកជំនាញពិតប្រាកដ ខណៈនិស្សិតខ្លះរកការងារមិនបាន ដោយសារខ្វះសមត្ថភាពអនុវត្តជាក់ស្តែង (Skill Mismatch)។",
+                block2Title: "២. លក្ខខណ្ឌគ្រឹះសម្រាប់និស្សិត IT",
+                block2Point1: "<strong class='text-slate-800 dark:text-slate-200'>ភាសាអង់គ្លេស៖</strong> ជាអាវុធដ៏សំខាន់បំផុតសម្រាប់ការអានឯកសារបច្ចេកទេស ស្រាវជ្រាវស៊ើបកូដ (Bugs) និងស្វ័យសិក្សា។",
+                block2Point2: "<strong class='text-slate-800 dark:text-slate-200'>Logic & Math៖</strong> គ្រឹះនៃការគិតបែបតក្កវិទ្យា និងគណិតវិទ្យាកម្រិតមូលដ្ឋាន គឺចាំបាច់សម្រាប់ការសរសេរកូដឱ្យមានប្រសិទ្ធភាព關鍵。",
+                block2Point3: "<strong class='text-slate-800 dark:text-slate-200'>ការបង្ហាញស្នាដៃ៖</strong> ប្រវត្តិរូប (CV) ទទេមិនអាចទាក់ទាញបានទេ ត្រូវតែមានគម្រោងជាក់ស្តែង (Portfolio) បង្ហាញលើទំព័រដូចជា GitHub។",
+                block3Title: "៣. ជំនាញទន់ និងសមភាពយេនឌ័រ",
+                block3Point1: "<strong class='text-slate-800 dark:text-slate-200'>បញ្ហា Introvert៖</strong> អ្នក IT ភាគច្រើនចំណាយពេលម្នាក់ឯងច្រើន តែការអភិវឌ្ឍ <strong class='text-slate-800 dark:text-slate-200'>Soft Skills</strong> គឺកាតាលីករជំរុញឱ្យក្លាយជាអ្នកដឹកនាំ ឬ Project Manager។",
+                block3Point2: "<strong class='text-slate-800 dark:text-slate-200'>ស្ត្រីក្នុងវិស័យបច្ចេកវិទ្យា៖</strong> ផ្នត់គំនិតចាស់ៗត្រូវបានផ្លាស់ប្តូរ។ កម្មវិធីរុញច្រានអាហារូបករណ៍បច្ចុប្បន្ន បានបង្កើនអត្រាសិស្សស្រីរៀន IT រហូតដល់ ៦០% ក្នុងវគ្គសិក្សាខ្លះ។",
+                block4Title: "៤. ការដើរទន្ទឹមគ្នារវាងមនុស្ស និង AI",
+                block4Point1: "<strong class='text-slate-800 dark:text-slate-200'>AI ជាជំនួយការ៖</strong> AI មិនមកដណ្តើមការងារមនុស្សទាំងស្រុងឡើយ មនុស្សនៅតែជាអ្នកដឹកនាំ ត្រួតពិនិត្យ និងវាយតម្លៃលើភាពត្រឹមត្រូវតាមវប្បធម៌ និងលំហូរអាជីវកម្ម។",
+                block4Point2: "<strong class='text-slate-800 dark:text-slate-200'>បញ្ហាខ្វះខាតទិន្នន័យខ្មែរ៖</strong> ទិន្នន័យភាសាខ្មែរលើអ៊ីនធឺណិតនៅមានកម្រិត ធ្វើឱ្យ AI ជួបផលវិបាកក្នុងការឆ្លើយតប។ ការរួមគ្នាបញ្ចូលទិន្នន័យខ្មែរជាកត្តាចាំបាច់បំផុត។",
+                videoSourceTitle: "ប្រភពវីដេអូដើមពី YouTube",
+                videoSourceDesc: "សូមទស្សនាកិច្ចសម្ភាសន៍ពេញលេញរបស់កម្មវិធី SUC News ជាមួយលោក ម៉ៅ វនបបញ្ញា ដើម្បីទទួលបានខ្លឹមសារលម្អិតបន្ថែម។",
+                videoPlatform: "ផ្លូវការនៅលើ YouTube",
+                footerText: "© 2026 ឯកសារស្រាវជ្រាវផ្ទាល់ខ្លួន - វិស័យព័ត៌មានវិទ្យានៅកម្ពុជា"
+            },
+            en: {
+                watchBtn: "Watch Full Video",
+                heroBadge: "Academic Research Support",
+                heroTitle: "Perspectives and Evolution of the <br class='hidden md:block'><span class='text-gradient-fix'>IT Sector in Cambodia</span>",
+                heroDesc: "Key research points extracted from SUC News Podcast (Ep11) featuring a tech lead with nearly 10 years of professional experience.",
+                block1Title: "1. IT Job Market Landscape in Cambodia",
+                block1Point1: "<strong class='text-slate-800 dark:text-slate-200'>High Demand Fields:</strong> Software Development leads the market, followed closely by Network & Infrastructure, and UI/Digital Design.",
+                block1Point2: "<strong class='text-slate-800 dark:text-slate-200'>Cross-Sector Growth:</strong> Driven extensively by digital transformation in banking systems (Mobile Apps, QR Payments), healthcare, and logistics.",
+                block1Point3: "<strong class='text-slate-800 dark:text-slate-200'>Skill Mismatch Gap:</strong> Companies struggle to find highly qualified tech professionals while some graduates remain unemployed due to a lack of hands-on technical skills.",
+                block2Title: "2. Foundational Requirements for IT Students",
+                block2Point1: "<strong class='text-slate-800 dark:text-slate-200'>English Proficiency:</strong> An absolute must-have asset for reading tech documentations, troubleshooting bugs, and sustaining continuous self-study.",
+                block2Point2: "<strong class='text-slate-800 dark:text-slate-200'>Logic & Mathematics:</strong> Core mathematical logic and basic algorithms are vital to writing highly structured and optimized code workflows.",
+                block2Point3: "<strong class='text-slate-800 dark:text-slate-200'>Project Portfolios:</strong> Empty CVs fail to stand out; students must build concrete practical applications and host them publicly on platforms like GitHub.",
+                block3Title: "3. Soft Skills & Demographics",
+                block3Point1: "<strong class='text-slate-800 dark:text-slate-200'>The Introvert Loop:</strong> Tech specialists spend excessive solo hours with hardware, but cultivating <strong class='text-slate-800 dark:text-slate-200'>Soft Skills</strong> is the precise trigger needed to scale into dynamic Team Leads or Project Managers.",
+                block3Point2: "<strong class='text-slate-800 dark:text-slate-200'>Women in Technology:</strong> Ancient traditional mindsets are fading. Scholarship frameworks actively drive female engagement, yielding up to 60% female representation in technical streams.",
+                block4Title: "4. The Collaborative Era of Human & AI",
+                block4Point1: "<strong class='text-slate-800 dark:text-slate-200'>AI as an Assistant:</strong> Automated tools will not replace humans comprehensively. Developers remain key drivers for testing accuracy and verifying localized business operations.",
+                block4Point2: "<strong class='text-slate-800 dark:text-slate-200'>Khmer Data Deficit:</strong> Local data structures on the web are sparse, causing engine discrepancies. Expanding structured Khmer digital repositories is fundamentally critical.",
+                videoSourceTitle: "Original Video Source on YouTube",
+                videoSourceDesc: "Watch the complete interview broadcast by SUC News with Mr. Mao Vonbapanha to absorb detailed localized IT insights.",
+                videoPlatform: "Official on YouTube",
+                footerText: "© 2026 Personal Research Portfolio - Information Technology in Cambodia"
+            }
+        };
+
+        // UI Selectors
+        const langSelect = document.getElementById('langSelect');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+        const mainHeading = document.getElementById('mainHeading');
+
+        // 1. Language Toggle Mechanism
+        function updateLanguage(lang) {
+            // ប្តូរអត្ថបទធម្មតា
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // ប្តូរចំណងជើងធំ (Heading) ដែលធ្លាប់មាន Bug
+            mainHeading.innerHTML = translations[lang]['heroTitle'];
+            
+            htmlElement.setAttribute('lang', lang);
+        }
+
+        langSelect.addEventListener('change', (e) => {
+            updateLanguage(e.target.value);
+        });
+
+        // 2. Default to Light Mode Explicitly
+        htmlElement.classList.remove('dark');
+        
+        themeToggle.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon text-lg';
+            } else {
+                htmlElement.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-lg text-amber-400';
+            }
+        });
+
+        // Initialize default view state
+        updateLanguage('km');
+    </script>
 </body>
 </html>
